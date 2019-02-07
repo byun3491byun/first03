@@ -42,7 +42,7 @@ env.hosts = [
 ]
 #4-1. pem 파일로 로그인하기 위해 
 env.use_ssh_config = True
-env.key_filename = 'byunket.pem' #동일폴더 위치
+env.key_filename = 'byunkey.pem' #동일폴더 위치
 
 #5. 원격지에 세팅될 디렉토리 지정
 #/home/ubuntu/first
@@ -57,10 +57,10 @@ apt_requirements = [
     'python3-dev',
     'build-essential',
     'apache2',
-    'livapache2-mod-wsgi-py3',
+    'libapache2-mod-wsgi-py3',
     'python3-setuptools',
     'libssl-dev',
-    'livffi-dev',
+    'libffi-dev',
 ]
 
 # 패브릭 구동시 fab 함수명
@@ -82,7 +82,7 @@ def _setup():
     #리눅스 패키지 업데이트 주소 or 패키지 목록 세팅
     _init_apt()
     #필요한 패키지 설치
-    _install_apt_packages('apt_requirements')
+    _install_apt_packages(apt_requirements)
     #가상환경 구축
     _making_virtualenv()
     #목표 : 운영체계에는 가장 기본 파이썬만 설치
