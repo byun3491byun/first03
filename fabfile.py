@@ -8,15 +8,6 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 envs = json.load( open( os.path.join( PROJECT_DIR, 'deploy.json' ) ) )
 
-'''
-{
-    'REPO_URL': 'https://github.com/byun3491byun/first03', 
-    'PROJECT_NAME': 'first03', 
-    'REMOTE_HOST': 'ec2-13-125-242-114.ap-northeast-2.compute.amazonaws.com', 
-    'REMOTE_HOST_SSH': '13.125.242.114', 
-    'REMOTE_USER': 'ubuntu'
-}
-'''
 
 
 REPO_URL = envs['REPO_URL']
@@ -44,10 +35,10 @@ apt_requirements = [
     'python3-dev',
     'build-essential',
     'apache2',
-    'livapache2-mod-wsgi-py3',
+    'libapache2-mod-wsgi-py3',
     'python3-setuptools',
     'libssl-dev',
-    'livffi-dev',
+    'libffi-dev'
 ]
 
 
@@ -57,7 +48,7 @@ def new_initServer():
 
 def _setup():
     _init_apt()
-    _install_apt_packages('apt_requirements')
+    _install_apt_packages( apt_requirements )
     _making_virtualenv()
     
 
@@ -117,7 +108,8 @@ def _ufw_allow():
     sudo("ufw reload")
 
 def _virtualhost_make():
-    script = """'<VirtualHost *:80>
+    script = """'
+    <VirtualHost *:80>
         ServerName {servername}
         <Directory /home/{username}/{project_name}>
             <Files wsgi.py>
