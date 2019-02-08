@@ -8,3 +8,12 @@ fabfile.py : 페브릭 작업 내용 기술
 fabfile_comment.py: 주석 버전 기술
 wsgi.py : entry 파일, 서버 구동 시 시작점
 requirements.txt : 서버 구동 시 필요한 모듈을 기술(버전 포함)
+
+#서버 로그 확인
+접속로그
+> tail -f /var/log.apache2/access.log (파이썬 로그)
+> ctrl + c
+에러로그
+> tail -f /var/log.apache2/error.log(500에러 로그)
+> ctrl + c
+
